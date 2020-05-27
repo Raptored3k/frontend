@@ -13,6 +13,14 @@
 			$this->wallet = $wallet;
 		}
 		
+		public function getEmail(){
+			return $this->email;
+		}
+		
+		public function getID(){
+			return $this->ID;
+		}
+		
 		public function getWallet(){
 			return $this->wallet;
 		}

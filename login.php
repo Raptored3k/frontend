@@ -27,9 +27,11 @@
 				//User($ID, $email, $gender, $wallet)
 				$user = new User($result['ID'], $result['email'], $result['gender'], $wallet);
 				$_SESSION['user'] = serialize($user);
+				$loginError = "Login successfully";
 			}else {
 				$loginError = "Incorrect login data";
 			}
 		}
 	}
+	$connectorDB -> close();
 ?>

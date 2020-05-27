@@ -1,4 +1,5 @@
 <!-- Uniq cloth page -->
+<!-- Uniq cloth page -->
 <!doctype html>
 <html lang="en">
 	<?php
@@ -54,8 +55,8 @@
 		<div class="container-fluid pt-3">
 			<?php
 				echo $clothes->getMainCloth()->innerLabel();
-				echo "<div class='col-12 pt-4 border-top border-secondary>";
-				echo "<span class=''><h1 class='mt-3'> Podobne produkty: </h1></span>";
+				echo "<div class='col-12 pt-4 border-top border-secondary'>";
+				echo "<h2 class='mt-3 font-weight-bold'> Podobne produkty: </h2>";
 				echo "</div>";
 				echo "<div class='container-fluid p-0'>";
 				echo "<div class='site-slider mb-5 mt-5'>";

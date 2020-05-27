@@ -1,3 +1,11 @@
+<?php
+	//include necessary class
+	include($directory."/database/typeList.php");
+	
+	//create type list object
+	$clothesK = new TypeList('kobiety');
+	$clothesM = new TypeList('mezczyzni');
+?>
 <!-- MODAL -->
 <div class="container">
 <div class="modal fadeInDown first" id="logowanie" role="dialog">
@@ -9,15 +17,17 @@
 	  </div>
 	  <div class="modal-body" style="padding:40px 50px;">
 		<form role="form" method="post" <?php echo "action='".$home.$reqestUrl[0]."index.php/".$reqestUrl[1]."'";?>>
-		  <div class="form-group fadeIn third">
-			<input name="email" type="text" class="form-control border-secondary"  placeholder="Wpisz adres email">
-		  </div>
-		  <div class="form-group fadeIn fourth">
-			<input name="password" type="password" class="form-control border-secondary"  placeholder="Wpisz hasło">
-		  </div>
-		  <div class="checkbox fadeIn fifth">
-			<label><input type="checkbox" value="" checked>Zapamiętaj</label>
-		  </div>
+			<div class="form-group fadeIn third">
+				<input name="email" type="text" class="form-control border-secondary"  placeholder="Wpisz adres email">
+			</div>
+			<div class="form-group fadeIn fourth">
+				<input name="password" type="password" class="form-control border-secondary"  placeholder="Wpisz hasło">
+			</div>
+			<div class="custom-control custom-checkbox fadeIn fifth">
+				<input type="checkbox" class="custom-control-input" id="remember">
+				<label class="custom-control-label" for="remember">Zapamiętaj</label>
+			</div>
+			
 		<div class="form-group fadeIn sixth">
 			<span><?php echo $loginError ?></span>
 		  </div>
@@ -41,7 +51,7 @@
 			<a <?php echo "href='".$home."'"; ?>><img <?php echo "src='".$home."/elements/logo.png'"; ?>  alt="" class="img-fluid"></a>
 		   </div>
 		   <div class="col-md-7 col-8 text-center pt-3 ">
-				<form class="form-inline p-0 my-lg-0 pl-5">
+				<form class="form-inline p-0 my-lg-0 pl-5 padding">
 				  <input class="form-control border-secondary form-rounded form-width" type="search" placeholder="Wyszukaj..." aria-label="Search">
 				  <button class="btn btn-outline-secondary ml-1 form-rounded" type="submit"><i class="fas fa-search"></i></button>
 				</form>
@@ -64,45 +74,45 @@
 		  <span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		  <ul class="navbar-nav mr-auto">
-			<li class="nav-item active px-4 underlineHover">
-			  <a class="nav-link" <?php echo "href='".$home."'"; ?>><h5 class="text-center">Home</h5> </a>
-			</li>
-			<li class="nav-item dropdown active px-4 underlineHover">
-			  <a class="nav-link " data-toggle="dropdown" <?php echo "href='".$home."/filter/?gender=kobiety'"; ?>><h5 class="text-center">Kobiety</h5></a>
-			  <div class="dropdown-menu">
-				  <a href="" class="dropdown-item">Sukienki</a>
-				  <a href="" class="dropdown-item">Koszulki i topy</a>
-				  <a href="" class="dropdown-item">Płaszcze</a>
-				  <a href="" class="dropdown-item">Sukienki</a>
-				  <a href="" class="dropdown-item">Koszulki i topy</a>
-				  <a href="" class="dropdown-item">Płaszcze</a>
-				  <a href="" class="dropdown-item">Sukienki</a>
-				  <a href="" class="dropdown-item">Koszulki i topy</a>
-				  <a href="" class="dropdown-item">Płaszcze</a>
-			  </div>
-			</li>
-			<li class="nav-item active dropdown px-4 underlineHover">
-				 <a class="nav-link " data-toggle="dropdown"<?php echo "href='".$home."/filter/?gender=mezczyzni'"; ?>><h5 class="text-center">Mężczyzni</h5> </a>
-				 <div class="dropdown-menu">
-				  <a href="" class="dropdown-item">Sukienki</a>
-				  <a href="" class="dropdown-item">Koszulki i topy</a>
-				  <a href="" class="dropdown-item">Płaszcze</a>
-				  <a href="" class="dropdown-item">Sukienki</a>
-				  <a href="" class="dropdown-item">Koszulki i topy</a>
-				  <a href="" class="dropdown-item">Płaszcze</a>
-				  <a href="" class="dropdown-item">Sukienki</a>
-				  <a href="" class="dropdown-item">Koszulki i topy</a>
-				  <a href="" class="dropdown-item">Płaszcze</a>
-			  </div>
-			</li>
-			<li class="nav-item active px-4 underlineHover">
-				<a class="nav-link" href="#"><h5 class="text-center">Kontakt</h5></a>
-			</li>
-			<li class="nav-item active px-4 underlineHover">
-				<a class="nav-link" href="#"><h5 class="text-center">O nas</h5></a>
-			</li>
-		  </ul>
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active px-4 underlineHover">
+				<a class="nav-link" <?php echo "href='".$home."'"; ?>><h5 class="text-center">Home</h5> </a>
+				</li>
+				<li class="nav-item dropdown active px-4 underlineHover">
+				<a class="nav-link " data-toggle="dropdown" <?php echo "href='".$home."/filter/?gender=kobiety'"; ?>><h5 class="text-center">Kobiety</h5></a>
+				<div class="dropdown-menu">
+					<?php
+						foreach ($clothesK->getTypeList() as $type){
+							echo "<a href='$home/filter/?gender=kobiety&type=$type' class='dropdown-item'>$type</a>";
+						}						
+					?>
+				</div>
+				</li>
+				<li class="nav-item active dropdown px-4 underlineHover">
+					<a class="nav-link " data-toggle="dropdown"<?php echo "href='".$home."/filter/?gender=mezczyzni'"; ?>><h5 class="text-center">Mężczyzni</h5> </a>
+					<div class="dropdown-menu">
+					<?php
+						foreach ($clothesM->getTypeList() as $type){
+							echo "<a href='$home/filter/?gender=mezczyzni&type=$type' class='dropdown-item'>$type</a>";
+						}						
+					?>
+				</div>
+				</li>
+				<li class="nav-item active px-4 underlineHover">
+					<a class="nav-link" href="#"><h5 class="text-center">Kontakt</h5></a>
+				</li>
+				<li class="nav-item active px-4 underlineHover">
+					<a class="nav-link" href="#"><h5 class="text-center">O nas</h5></a>
+				</li>
+			</ul>
+		</div>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ">
+				<li class="nav-item active px-4 text-center">
+					<a class="color-black" href="#"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
+				</li>
+			</ul>
+		</div>
 		  
 		</div>
 	  </nav>

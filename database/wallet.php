@@ -12,6 +12,10 @@
 			return $this->balance;
 		}
 		
+		public function getID(){
+			return $this->ID;
+		}
+		
 		public function setBalance($dbConnector, $balance){
 			$query = "update wallets set balance = $balance where id = this->ID;";
 			$dbConnector->query($query);
