@@ -1,6 +1,6 @@
 <?php 
 	session_start();
-	if(isset($_SESSION['gender']))
-		unset($_SESSION['gender']);
+	if(isset($_SESSION['user']))
+		unset($_SESSION['user']);
 	header("Location: index.php");
 ?>

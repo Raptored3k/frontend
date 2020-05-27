@@ -1,5 +1,4 @@
 <!-- Uniq cloth page -->
-<!-- Uniq cloth page -->
 <!doctype html>
 <html lang="en">
 	<?php
@@ -8,8 +7,8 @@
 		$home = "http://".$_SERVER['SERVER_NAME'];
 		$reqestUrl = $uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
 		//set '/' when in url didn't occur param or precision url
-		if(!isset($reqestUrl[0])) $reqestUrl[0] = "/";
-		if(!isset($reqestUrl[1])) $reqestUrl[1] = "/";
+		if(!isset($reqestUrl[0])) $reqestUrl[0] = "";
+		if(!isset($reqestUrl[1])) $reqestUrl[1] = "";
 		else
 			$reqestUrl[1] = '?'.$reqestUrl[1];//add ? at start of string to create correct param url
 		include($directory."/login.php");
@@ -49,21 +48,21 @@
 			$parts = parse_url($url);
 			parse_str($parts['query'], $parmUrl);
 			
-			//create object clothLabelList
-			$clothes = new ClothLabelList($parmUrl['id']);
+			//create object clothLabelList. Decoded id
+			$clothes = new ClothLabelList(base64_decode($parmUrl['id']));
 		?>
 		<div class="container-fluid pt-3">
 			<?php
 				echo $clothes->getMainCloth()->innerLabel();
-				echo "<div class='col-12 pt-4 border-top border-secondary'>";
-				echo "<h2 class='mt-3 font-weight-bold'> Podobne produkty: </h2>";
+				echo "<div class='col-12 pt-4 border-top border-secondary>";
+				echo "<span class=''><h1 class='mt-3'> Podobne produkty: </h1></span>";
 				echo "</div>";
 				echo "<div class='container-fluid p-0'>";
 				echo "<div class='site-slider mb-5 mt-5'>";
 				echo "<div class='slider-items2'>";
 				foreach($clothes->getClothesList() as $cloth){
 					//create element for one cloth
-					echo $cloth->innerHTMLx($home);
+					echo $cloth->innerHTMLSlider($home);
 				}
 				echo "</div>";
 				echo "<div class='btn-slider2'>";
@@ -89,6 +88,6 @@
 	<!-- navi script -->
 	<script <?php echo "src='".$home."/elements/script.js'"?>></script>
 	<!-- database script-->
-	<script <?php echo "src='".$home."/database/script.js'"?>></script>
+	<script <?php echo "src='".$home."/database/basket.js'"?>></script>
 </body>
 </html>

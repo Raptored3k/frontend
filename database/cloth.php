@@ -34,8 +34,8 @@
 				
 		}
 		
-		public function getID(){
-			return $this->id;
+		public function getID(){	
+			return base64_encode($this->id);
 		}
 		
 		public function getName(){
@@ -59,25 +59,24 @@
 		}
 		
 		public function innerHTML($home){
+			$id = $this->getID();
 			$outputHTML = "<div class='mb-5  $this->class'>";
 			$outputHTML .= "<div class=''> ";
-			$outputHTML .= "<a href='$home/clothes/?id=$this->id'>";
+			$outputHTML .= "<a href='$home/clothes/?id=$id'>";
 			$outputHTML .= "<img class='img-fluid px-3 pb-5' src='$this->img_src'/>";
 			$outputHTML .= "</a>";
 			$outputHTML .= "<div class='price '>";
 			$outputHTML .= $this->price;
 			$outputHTML .= "</div>";
-			$outputHTML .= "<svg id='$this->id' class='basket' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>";
-			$outputHTML .= "<path d='M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm9.804-16.5l-3.431 12h-2.102l2.542-9h-5.993c.113.482.18.983.18 1.5 0 3.59-2.91 6.5-6.5 6.5-.407 0-.805-.042-1.191-.114l1.306 3.114h13.239l3.474-12h1.929l.743-2h-4.196zm-6.304 15c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm-4.5-10.5c0 2.485-2.018 4.5-4.5 4.5-2.484 0-4.5-2.015-4.5-4.5s2.016-4.5 4.5-4.5c2.482 0 4.5 2.015 4.5 4.5zm-2-.5h-2v-2h-1v2h-2v1h2v2h1v-2h2v-1z'/>";
-			$outputHTML .= "</svg>";
 			$outputHTML .= "</div>";
 			$outputHTML .= "</div>";
 			return $outputHTML;
 		}
 
-		public function innerHTMLx($home){
+		public function innerHTMLSlider($home){
+			$id = $this->getID();
 			$outputHTML = "<div class='item2'>";
-			$outputHTML .= "<a href='$home/clothes/?id=$this->id'>";
+			$outputHTML .= "<a href='$home/clothes/?id=$id'>";
 			$outputHTML .= "<img class='img-fluid px-3' src='$this->img_src'/>";
 			$outputHTML .= "</a>";
 			$outputHTML .= "</div>";
@@ -103,16 +102,14 @@
 			$outputHTML .= "<br>";
 			$outputHTML .= "<br>";
 			$outputHTML .= "<h3> Rozmiar: </h3>";
-			$outputHTML .= "<form>";
 			$outputHTML .= "<select name='rozmiar' class='custom-select'>";
-			$outputHTML .= "<option> XS </option>";
-			$outputHTML .= "<option> S </option>";
-			$outputHTML .= "<option> M </option>";
-			$outputHTML .= "<option> L </option>";
-			$outputHTML .= "<option> XL </option>";
-			$outputHTML .= "<option> XXL </option>";
+			$outputHTML .= "<option value='xs'> XS </option>";
+			$outputHTML .= "<option value='s'> S </option>";
+			$outputHTML .= "<option value='m'> M </option>";
+			$outputHTML .= "<option value='l'> L </option>";
+			$outputHTML .= "<option value='x;'> XL </option>";
+			$outputHTML .= "<option value='xxl'> XXL </option>";
 			$outputHTML .= "</select>";
-			$outputHTML .= "</form>";
 			$outputHTML .= "<br>";
 			$outputHTML .= "<button class='btn btn-dark btn-block mt-2 btn-lg'> Do koszyka </button>";
 			$outputHTML .= "</p>";

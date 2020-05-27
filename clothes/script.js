@@ -7,7 +7,7 @@ $(".slider-items2").slick({
     autoplaySpeed: 2000,
     prevArrow: ".site-slider .btn-slider2 .left2",
     nextArrow: ".site-slider .btn-slider2 .right2",
-    responsive: [
+	responsive: [
         {
             breakpoint: 500,
             settings: {
@@ -19,5 +19,4 @@ $(".slider-items2").slick({
             }
         }
     ]
-
 });

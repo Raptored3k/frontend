@@ -7,9 +7,14 @@
     padding-left: 0 !important;
   }
 }
-//KURWA
-.custom-control-label::after {
-  color: black !important;
+
+.dropdown-item.active, .dropdown-item:active {
+  color:white !important;
+  background-color: #292b2c !important;
+}
+
+#selectCenter {
+  text-align: center !important;
 }
 
 .color-black {
@@ -313,7 +318,3 @@ input[type="color"]:focus,
   .underlineHover:hover:after{
     width: 100%;
   }
-
- 
-      
-       

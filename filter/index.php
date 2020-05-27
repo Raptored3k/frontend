@@ -7,8 +7,8 @@
 		$home = "http://".$_SERVER['SERVER_NAME'];
 		$reqestUrl = $uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
 		//set '/' when in url didn't occur param or precision url
-		if(!isset($reqestUrl[0])) $reqestUrl[0] = "/";
-		if(!isset($reqestUrl[1])) $reqestUrl[1] = "/";
+		if(!isset($reqestUrl[0])) $reqestUrl[0] = "";
+		if(!isset($reqestUrl[1])) $reqestUrl[1] = "";
 		else
 			$reqestUrl[1] = '?'.$reqestUrl[1];//add ? at start of string to create correct param url
 		include($directory."/login.php");
@@ -40,36 +40,50 @@
 		
 		$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 		$parts = parse_url($url);
-		parse_str($parts['query'], $parmUrl);
 		
-		if(isset($parmUrl['gender'])){
-			//get gender from url
-			$gender = $parmUrl['gender'];
-			
-			//create clothes object
-			$clothes = new Clothes($gender);
-			
-			//if type was give in path
-			if(isset($parmUrl['type'])){
-				//get correct type from url
-				$type = str_replace('%',' ',$parmUrl['type']);;
-	
-				echo "<div class='container'>";
-				echo "<div class='row'>";
-				foreach($clothes->getClothesByType($type, $gender) as $key=>$cloth){
-					if($key%3==0 && $key!=0){
-						echo "</div>";
-						echo "<div class='row'>";
-						echo $cloth->innerHTML($home);
-					}else
-					//create element for one cloth
-					echo $cloth->innerHTML($home);
-				}
-				echo "</div>";
-			}	
+		//when in url didnt give query
+		if(!isset($parts['query'])){
+			//change location
+			echo "<script>window.location.href = '$home'</script>";
 		}else{
-			//if gender wasn't set go to main page
-			header('location: '.$home);
+			//if in url occur query
+			parse_str($parts['query'], $parmUrl);
+			
+			//if parm is gender
+			if(isset($parmUrl['gender'])){
+				//get gender from url
+				$gender = $parmUrl['gender'];
+				
+				//create clothes object
+				$clothes = new Clothes($gender);
+				
+				//if type was give in path
+				if(isset($parmUrl['type'])){
+					//get correct type from url
+					$type = str_replace('%',' ',$parmUrl['type']);;
+		
+					echo "<div class='container'>";
+					echo "<div class='row'>";
+					foreach($clothes->getClothesByType($type, $gender) as $key=>$cloth){
+						if($key%3==0 && $key!=0){
+							echo "</div>";
+							echo "<div class='row'>";
+							echo $cloth->innerHTML($home);
+						}else
+						//create element for one cloth
+						echo $cloth->innerHTML($home);
+					}
+					echo "</div>";
+				}	
+			}else if(isset($parmUrl['query'])){
+				$searchQuery = $parmUrl['query'];
+				$parmsArray = explode(" ",$searchQuery);
+				$parmsArray = array_slice($parmsArray,0,3);
+				
+				
+			}else{
+				echo "<script>window.location.href = '$home'</script>";
+			}
 		}
 	?>
 	</main>
@@ -81,7 +95,5 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 	<!-- navi script -->
 	<script <?php echo "src='".$home."/elements/script.js'"?>></script>
-	<!-- database script-->
-	<script <?php echo "src='".$home."/database/script.js'"?>></script>
 </body>
 </html>

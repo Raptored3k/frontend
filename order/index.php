@@ -11,8 +11,8 @@
 		$directory = $_SERVER['DOCUMENT_ROOT'];
 		$reqestUrl = $uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
 		//set '/' when in url didn't occur param or precision url
-		if(!isset($reqestUrl[0])) $reqestUrl[0] = "/";
-		if(!isset($reqestUrl[1])) $reqestUrl[1] = "/";
+		if(!isset($reqestUrl[0])) $reqestUrl[0] = "";
+		if(!isset($reqestUrl[1])) $reqestUrl[1] = "";
 		else
 			$reqestUrl[1] = '?'.$reqestUrl[1];//add ? at start of string to create correct param url
 		include($directory."/login.php");
