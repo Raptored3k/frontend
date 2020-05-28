@@ -29,6 +29,8 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
 	<link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-font-face.min.css" media="all" rel="stylesheet">
+	<style>
+	</style>
   </head>
 
 	<?php include($directory."/elements/header.php");?>
@@ -40,17 +42,59 @@
 		</div>
 		<?php if(isset($_SESSION['user'])):?>
 		<div class="container">
-			<div class="row">
-				<div class="col-md-4 text-center border-bottom p-2">PRODUKT</div>
-				<div class="col-md-4 text-center border-bottom border-left p-2">ROZMIAR / ILOŚĆ</div>
-				<div class="col-md-4 text-center border-bottom border-left p-2">CENA</div>
+			<div class="row align-items-center border-bottom">
+				<div class="col-md-4 text-center p-2"><h3 class="font-weight-bold">PRODUKT</h3></div>
+				<div class="col-md-4 text-center border-left border-right p-2"><h3 class="font-weight-bold">ROZMIAR / ILOŚĆ</h3></div>
+				<div class="col-md-4 text-center p-2"><h3 class="font-weight-bold">CENA</h3></div>
 			</div>
-			<div class="row">
-			<div class="col-md-4"><img src="" class="img-thumbnail"></div>
-			<div class="col-md-4"></div>
-			<div class="col-md-4"></div>
+			<div class="row align-items-center border-bottom">
+				<div class="col-md-4 text-center  p-2 "><h5>Nazwa produktu ni</h5></div>
+				<div class="col-md-4 text-center  p-4 border-left border-right">
+					<select name='rozmiar' class='custom-select'>
+						<option value='xs'> XS </option>
+							<option value='s'> S </option>
+							<option value='m'> M </option>
+							<option value='l'> L </option>
+							<option value='x'> XL </option>
+							<option value='xxl'> XXL </option>
+					</select> 
+					<input type="number" placeholder="Wybierz ilość" min="0" class="form-control mt-2">
+				</div>
+			<div class="col-md-4 text-center p-2"><h5> CENA TU MA BYĆ</h5></div>
 			</div>
-			<div class="col-12 text-center"><button id="buy">PRZEJDŹ DO PŁATNOŚCI</button></div>
+
+			<div class="row align-items-center border-bottom">
+				<div class="col-md-4 text-center  p-2 "><h5>Nazwa produktu ni</h5></div>
+				<div class="col-md-4 text-center  p-4 border-left border-right">
+					<select name='rozmiar' class='custom-select'>
+						<option value='xs'> XS </option>
+							<option value='s'> S </option>
+							<option value='m'> M </option>
+							<option value='l'> L </option>
+							<option value='x'> XL </option>
+							<option value='xxl'> XXL </option>
+					</select> 
+					<input type="number" placeholder="Wybierz ilość" min="0" class="form-control mt-2">
+				</div>
+			<div class="col-md-4 text-center p-2"><h5> CENA TU MA BYĆ</h5></div>
+			</div>
+			
+			<div class="row align-items-center border-bottom">
+				<div class="col-md-4 text-center  p-2 "><h5>Nazwa produktu ni</h5></div>
+				<div class="col-md-4 text-center  p-4 border-left border-right">
+					<select name='rozmiar' class='custom-select'>
+							<option value='xs'> XS </option>
+							<option value='s'> S </option>
+							<option value='m'> M </option>
+							<option value='l'> L </option>
+							<option value='x'> XL </option>
+							<option value='xxl'> XXL </option>
+					</select> 
+					<input type="number" placeholder="Wybierz ilość" min="0" class="form-control mt-2">
+				</div>
+			<div class="col-md-4 text-center p-2"><h5> CENA TU MA BYĆ</h5></div>
+			</div>
+			<div class="col-12 text-center py-5"><button class="btn btn-outline-secondary btn-lg" id="buy">PRZEJDŹ DO PŁATNOŚCI</button></div>
 			
 		</div>
 		
