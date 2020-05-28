@@ -11,7 +11,8 @@
 		if(!isset($reqestUrl[1])) $reqestUrl[1] = "";
 		else
 			$reqestUrl[1] = '?'.$reqestUrl[1];//add ? at start of string to create correct param url
-		include($directory."/login.php");
+		include($directory."/elements/login.php");
+		include($directory."/elements/register.php");
 	?> 
   <head>
     <title>Cenere</title>

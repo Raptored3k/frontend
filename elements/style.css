@@ -7,14 +7,9 @@
     padding-left: 0 !important;
   }
 }
-
-.dropdown-item.active, .dropdown-item:active {
-  color:white !important;
-  background-color: #292b2c !important;
-}
-
-#selectCenter {
-  text-align: center !important;
+//KURWA
+.custom-control-label::after {
+  color: black !important;
 }
 
 .color-black {
@@ -52,11 +47,23 @@ header {
     top: 50%;
 }
 
+.pointer{
+	cursor: pointer;
+}
+
 a{
     text-decoration: none !important;
     color: black !important;
 }
 a:hover {
+    text-decoration: none !important;
+}
+
+button{
+    text-decoration: none !important;
+    color: black !important;
+}
+button:hover {
     text-decoration: none !important;
 }
 

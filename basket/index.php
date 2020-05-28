@@ -11,7 +11,8 @@
 		if(!isset($reqestUrl[1])) $reqestUrl[1] = "";
 		else
 			$reqestUrl[1] = '?'.$reqestUrl[1];//add ? at start of string to create correct param url
-		include($directory."/login.php");
+		include($directory."/elements/login.php");
+		include($directory."/elements/register.php");
 	?> 
   <head>
     <title>Cenere</title>
@@ -38,9 +39,23 @@
 		<div class="basketPrice">
 		</div>
 		<?php if(isset($_SESSION['user'])):?>
-		<button id="buy">PRZEJDŹ DO PŁATNOŚCI</button>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 text-center border-bottom p-2">PRODUKT</div>
+				<div class="col-md-4 text-center border-bottom border-left p-2">ROZMIAR / ILOŚĆ</div>
+				<div class="col-md-4 text-center border-bottom border-left p-2">CENA</div>
+			</div>
+			<div class="row">
+			<div class="col-md-4"><img src="" class="img-thumbnail"></div>
+			<div class="col-md-4"></div>
+			<div class="col-md-4"></div>
+			</div>
+			<div class="col-12 text-center"><button id="buy">PRZEJDŹ DO PŁATNOŚCI</button></div>
+			
+		</div>
+		
 		<?php else: ?>
-		<div>ZALOGUJ SIĘ ABY PRZESC DO PŁATNOŚCI</div>
+		<div class="col-12 text-center"><h1>ZALOGUJ SIĘ ABY PRZEJŚĆ DO PŁATNOŚCI</h1></div>
 		<?php endif ?>
 		<div id="result"></div>
 	</main>

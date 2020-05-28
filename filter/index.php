@@ -11,7 +11,8 @@
 		if(!isset($reqestUrl[1])) $reqestUrl[1] = "";
 		else
 			$reqestUrl[1] = '?'.$reqestUrl[1];//add ? at start of string to create correct param url
-		include($directory."/login.php");
+		include($directory."/elements/login.php");
+		include($directory."/elements/register.php");
 	?> 
   <head>
     <title>Cenere</title>
@@ -37,6 +38,7 @@
 	<?php
 		include('navi_elem_creator.php');
 		include($directory."/database/clothes.php");
+		include($directory."/database/searchClothes.php");
 		
 		$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 		$parts = parse_url($url);
@@ -78,8 +80,20 @@
 			}else if(isset($parmUrl['query'])){
 				$searchQuery = $parmUrl['query'];
 				$parmsArray = explode(" ",$searchQuery);
-				$parmsArray = array_slice($parmsArray,0,3);
+				$searchClothes = new SearchClothes($parmsArray);
 				
+				echo "<div class='container'>";
+					echo "<div class='row'>";
+					foreach($searchClothes->getClothesList() as $key=>$cloth){
+						if($key%3==0 && $key!=0){
+							echo "</div>";
+							echo "<div class='row'>";
+							echo $cloth->innerHTML($home);
+						}else
+						//create element for one cloth
+						echo $cloth->innerHTML($home);
+					}
+				echo "</div>";
 				
 			}else{
 				echo "<script>window.location.href = '$home'</script>";

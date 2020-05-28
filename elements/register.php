@@ -1,18 +1,13 @@
 <?php
-	session_start();
 	$directory = $_SERVER['DOCUMENT_ROOT'];
-	include($directory."/database/databaseLink.php");
+	require_once ($directory."/database/databaseLink.php");
 	
 	$home = "http://".$_SERVER['SERVER_NAME'];
 	
 	//login data ini
 	$email    = "";
 	
-	//errors ini
-	$emailError = "";
-	$passwordError = "";
-	$loginError = "";
-	$genderError = "";
+	$registerError= "";	
 	
 	$isError = false;
 	
@@ -29,12 +24,12 @@
 		if(isset($_POST['gender'])){
 			$gender = mysqli_real_escape_string($connectorDB, $_POST['gender']);
 		}else{
-			$genderError = "Choose gender is required"; $isError = true;
+			$registerError = "Choose gender is required"; $isError = true;
 		}
 		//valid data, and add error if necessary
-		if(empty($email)){	$emailError = "Email is required"; $isError = true;}
-		if(empty($password)){	$passwordError = "Password is required"; $isError = true;}
-		if ($password != $passwordR){	$passwordError = "Passwords do not match"; $isError = true;}
+		if(empty($email)){	$registerError = "Email is required"; $isError = true;}
+		if(empty($password)){	$registerError = "Password is required"; $isError = true;}
+		if ($password != $passwordR){	$registerError = "Passwords do not match"; $isError = true;}
 	
 	
 		//valid email in db
@@ -43,7 +38,7 @@
 		//if user with this email already exist
 		$user = mysqli_fetch_assoc($result);
 		if($user){
-			$emailError = "Email is already exist"; $isError = true;
+			$registerError = "Email is already exist"; $isError = true;
 		}
 		
 		//register new user if error not occured

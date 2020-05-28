@@ -1,11 +1,14 @@
 <?php
 	$directory = $_SERVER['DOCUMENT_ROOT'];
 	$home = "http://".$_SERVER['SERVER_NAME'];
-	include($directory."/database/databaseLink.php");
-	include($directory."/database/user.php");
+	require_once($directory."/database/databaseLink.php");
+	require_once($directory."/database/user.php");
 	$loginError = "";
 	//connector to the database
 	$connectorDB = new ConnectorDB();
+	
+	//include logout
+	include("logout.php");
 	
 	//login function
 	
@@ -30,13 +33,12 @@
 				//User($ID, $email, $gender, $wallet)
 				$user = new User($result['ID'], $result['email'], $result['gender'], $wallet);
 				$_SESSION['user'] = serialize($user);
-				return "Login successfully";
-				if(isset($_POST['remeber'])){
-					//remeber user data in cookies
+				if(isset($_POST['remember'])){
+					//remember user data in cookies
 					setcookie("password",$password,time()+86400*30,'/');
 					setcookie("email",$email,time()+86400*30,'/');
 				}
-			
+				return "Login successfully";
 			}else {
 				return "Incorrect login data";
 			}
@@ -48,8 +50,9 @@
 		if(isset($_COOKIE["email"]) && isset($_COOKIE["password"])){
 			login($_COOKIE["email"], $_COOKIE["password"], $connectorDB, true);
 		}
+		
 	}
-	//login 
+	//check, if user click login in modal
 	if (isset($_POST['login_user'])) {
 		 $email = $_POST['email'];
 		 $password = $_POST['password'];
