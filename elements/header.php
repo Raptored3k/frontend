@@ -107,7 +107,7 @@
 		   </div>
 		   <div class="col-md-7 col-8 text-center pt-3 ">
 				<span class="form-inline p-0 my-lg-0 pl-5 padding">
-				  <input id="query" class="form-control border-secondary form-rounded form-width" type="search" placeholder="Wyszukaj..." aria-label="Search">
+				  <input id="query" onchange="search()" class="form-control border-secondary form-rounded form-width" type="search" placeholder="Wyszukaj..." aria-label="Search">
 				  <button id="search" class="btn btn-outline-secondary ml-1 form-rounded"><i class="fas fa-search"></i></button>
 				</span>
 		   </div>

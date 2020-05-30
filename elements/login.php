@@ -25,8 +25,8 @@
 			$query .= "inner join gender on gender.id = users.gender_id ";
 			$query .= "inner join wallets on wallets.user_id = users.id ";
 			$query .= "where email like '$email' and password like '$password'; ";
-			
-			$results = $connectorDB -> query($query);
+			error_log($query);
+			$results = $connectorDB -> query($query,0);
 			$result = mysqli_fetch_assoc($results);
 			if (mysqli_num_rows($results) > 0) {
 				$wallet = new Wallet($result['wallet_id'], $result['balance']);

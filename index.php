@@ -29,6 +29,11 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
 	<link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-font-face.min.css" media="all" rel="stylesheet">
+	<meta http-equiv="cache-control" content="max-age=0" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+	<meta http-equiv="pragma" content="no-cache" />
   </head>
   <body>
 	<?php include($directory."/elements/header.php");?>
@@ -57,7 +62,7 @@
       </div>
       
       <div class="container-fluid p-0 ">
-        <div class="col-12 divek pl-5 pt-4 border-top" style="font-size:4vw" >Może Ci się spodobać...</div>
+        <div class="col-12 divek pl-5 pt-4 border-top h2" >Może Ci się spodobać...</div>
         <div class="site-slider m-0">
           <div class="slider-items">
             <div class="item">

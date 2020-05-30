@@ -8,9 +8,17 @@
   }
 }
 
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
+
+
 .dropdown-item.active, .dropdown-item:active {
   color:white !important;
   background-color: #292b2c !important;
+}
+
+#selectCenter {
+  text-align: center !important;
 }
 
 .color-black {
@@ -28,6 +36,7 @@
 
 body {
     color: #0d0d0d;
+    font-family: 'Roboto', sans-serif !important;
 }
 header {
     background-color: rgb(255, 255, 255);
@@ -52,7 +61,7 @@ header {
 	cursor: pointer;
 }
 
-a{
+.dropdown-menu > a{
     text-decoration: none !important;
     color: black !important;
 }
@@ -60,11 +69,11 @@ a:hover {
     text-decoration: none !important;
 }
 
-button{
+.profile button{
     text-decoration: none !important;
     color: black !important;
 }
-button:hover {
+.profile button:hover {
     text-decoration: none !important;
 }
 

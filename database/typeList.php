@@ -10,6 +10,7 @@
 			//call to db
 			$result = $connectorDB -> query($this->getTypeQery($gender));
 			//loop for result
+			if($result)
 			while($row = mysqli_fetch_assoc($result)){
 				//add all uniq type
 				array_push($this->typeList, $row['type']);

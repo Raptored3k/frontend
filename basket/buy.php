@@ -3,20 +3,34 @@
 	$directory = $_SERVER['DOCUMENT_ROOT'];
 	$home = "http://".$_SERVER['SERVER_NAME'];
 	include($directory."/database/user.php");
-	include($directory."/database/clothBasket.php");
 	include($directory."/database/order.php");
 	
-	$arrayStr = $_POST['basket'];
-	//if basket is empty
-	if(strlen($arrayStr)<=0){
-		exit();
+	//if idlist size or amunt isnt set
+	if(!isset($_POST['id']) || !isset($_POST['size']) || !isset($_POST['amount'])){
+			header('Location: '.$home."/basket/");
 	}
 	
-	$clothBasket = new ClothBasket($arrayStr);
-	$user = unserialize($_SESSION['user']);
-	//Add order to database
-	//order __construct($user_id, $clothesList, $price)
-	$order = new order($user->getID(), $clothBasket->getClothesList(), $clothBasket->getBusketPrice());
-	$id = strval($order->getID());
-	echo "$home/order/?order=$id";
+	//if user not login
+	if(!isset($_SESSION['user'])){
+		header('Location: '.$home."/basket/");
+	}else{
+		$idList = $_POST['id'];
+		$sizeList = $_POST['size'];
+		$amountList = $_POST['amount'];
+		
+		if(count($idList) == count($sizeList) && count($sizeList) == count($amountList)){
+			if(count($idList) == 0){
+				header('Location: '.$home."/order/");
+			}else{
+				//get user from session
+				$user = unserialize($_SESSION['user']);
+				//add new order to datbase // __construct($user_id, $idList, $sizeList, $amountList)
+				$order = new order($user->getID(), $idList, $sizeList, $amountList);
+				header('Location: '.$home."/order/");
+			}
+		}else{
+			header('Location: '.$home."/basket/");
+		}
+	}
+	
 ?>

@@ -62,7 +62,7 @@
 			//send query to db
 			$result = $connectorDB -> query($query);
 			$id = mysqli_fetch_assoc($result)['id'];
-			$query  = "insert into wallets values(default, 0.00, $id)";
+			$query  = "insert into wallets values(default, 10000.00, $id)";
 			$connectorDB -> query($query);
 			
 			header('location: '.$home);

@@ -29,7 +29,11 @@
 	
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
-	
+	<meta http-equiv="cache-control" content="max-age=0" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+	<meta http-equiv="pragma" content="no-cache" />
 	<style>
 	.right2 {
     	right: 0;
@@ -88,7 +92,7 @@
     <script src="script.js"></script>
 	<!-- navi script -->
 	<script <?php echo "src='".$home."/elements/script.js'"?>></script>
-	<!-- database script-->
-	<script <?php echo "src='".$home."/database/basket.js'"?>></script>
+	<!-- basket script -->
+	<script <?php echo "src='".$home."/database/basket/basket.js'"?>></script>
 </body>
 </html>

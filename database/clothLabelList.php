@@ -14,6 +14,7 @@
 			$result = $connectorDB -> query($this->getMainQery($id));
 			
 			//loop for result
+			if($result)
 			while($row = mysqli_fetch_assoc($result)){
 				// new cloth  __construct($id, $brand, $name, $price, $gender, $type, $img_src){
 				$this->mainCloth = new Cloth($row['id'], $row['brand'], $row['name'], $row['price'], $row['gender'], $row['type'], $row['img_src']);
@@ -22,6 +23,7 @@
 			//call to db, and get clothes list, which have type_id like main cloth
 			$result = $connectorDB -> query($this->getClothesQery($this->mainCloth->getTypeC(), $this->mainCloth->getGender(), $id));
 			//loop for result
+			if($result)
 			while($row = mysqli_fetch_assoc($result)){
 				// new cloth  __construct($id, $brand, $name, $price, $gender, $type, $img_src){
 				array_push($this->clothesList, new Cloth($row['id'], $row['brand'], $row['name'], $row['price'], $row['gender'], $row['type'], $row['img_src']));

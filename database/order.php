@@ -1,27 +1,46 @@
 <?php
 	require_once('databaseLink.php');
-	require_once('cloth.php');
+	require_once('clothBasket.php');
 	class Order{
 		private $connectorDB;
 		private $id;
-		function __construct($user_id, $clothesList, $price){
+		function __construct($user_id, $idList, $sizeList, $amountList){
 			//create connection do db and query
 			$this->connectorDB = new ConnectorDB();
+			
+			//get id string
+			$idString = "";
+			foreach($idList as $id){
+				$idString .= base64_decode($id).",";
+			}
+			$idString = substr($idString, 0, strlen($idString)-1);
+			
+			//create clothBasket
+			$clothBasket = new ClothBasket($idString);
+			
+			//calc $price
+			$price = 0;
+			
+			foreach($idList as $key=>$id){
+				$cloth = $clothBasket->getByID($id);
+				$price += $cloth->getPrice() * $amountList[$key];
+			}
 			
 			//add record to order table
 			$this->connectorDB->query($this->getOrderQuery($user_id, $price));
 			//set id from previous query
 			$this->id = $this->connectorDB->insert_id;
 			//add record to order_clothes table
-			$this->connectorDB->query($this->getUser_clothes($user_id, $clothesList, $this->id ));
+			echo $this->getUser_clothesQuery($user_id, $idList, $this->id, $sizeList, $amountList);
+			$this->connectorDB->query($this->getUser_clothesQuery($user_id, $idList, $this->id, $sizeList, $amountList));
 			$this->connectorDB -> close();
 		}
 		
-		private function getUser_clothes($user_id, $clothesList, $order_id){
-			$query = "INSERT INTO order_clothes(cloth_id, user_id, order_id) values ";
-			foreach($clothesList as $cloth){
-				$id = strval($cloth->getID());
-				$query .= "($id, $user_id, $order_id), ";
+		private function getUser_clothesQuery($user_id, $idList, $order_id, $sizeList, $amountList){
+			$query = "INSERT INTO order_clothes(cloth_id, user_id, order_id, size, amount) values ";
+			foreach($idList as $key=>$id){
+				$id = base64_decode($id);
+				$query .= "($id, $user_id, $order_id, '$sizeList[$key]', $amountList[$key]), ";
 			}
 			//remove last white space and ',' 
 			$query = substr($query, 0, -2);

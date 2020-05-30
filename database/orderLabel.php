@@ -15,24 +15,28 @@
 		}
 		
 		public function getClothesNameList($home){
-			$names = "<div>";
+			$names = "<div class='row'>";
+			$names .= "<div class='col-12 text-center mt-3 border-top border-bottom py-4'>";
+			$names .= "<p class='orders h5 '>";
 			$names .= "<a href='$home\order\?order=$this->id'>"; 
-			$names .= "<span class='orders'>";
+			$names .= "<span class=''>";
 			foreach($this->clothesList as $name){
-				$names .= explode('-',$name)[0].","; 
+				$names .= explode('-',$name)[0].", "; 
 			}
 			$names = substr($names,0,strlen($names)-1);
 			$names .= "</span>";
 			$names .= "<span>";
-			$names .= "$this->total_price";
+			$names .= "- $this->total_price zł";
 			$names .= "</span>";
 			$names .= "<span>";
 			if($this->paid == 0)	
-				$names .= "- nie opłacono ";
+				$names .= " - nie opłacono ";
 			else
-				$names .= "- opłacono ";
+				$names .= " - opłacono ";
 			$names .= "</span>";
 			$names .= "</a>";
+			$names .= "</p>";
+			$names .= "</div>";
 			$names .= "</div>";
 			return $names;
 		}	

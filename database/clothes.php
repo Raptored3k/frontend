@@ -14,6 +14,7 @@
 			$result = $connectorDB -> query($this->getClothesQery($gender));
 			
 			//loop for result
+			if($result)
 			while($row = mysqli_fetch_assoc($result)){
 				// new cloth  __construct($id, $brand, $name, $price, $gender, $type, $img_src){
 				array_push($this->clothesList, new Cloth($row['id'], $row['brand'], $row['name'], $row['price'], $row['gender'], $row['type'], $row['img_src']));
@@ -21,6 +22,7 @@
 			//call to db
 			$result = $connectorDB -> query($this->getTypeQery($gender));
 			//loop for result
+			if($result)
 			while($row = mysqli_fetch_assoc($result)){
 				//add all uniq type
 				array_push($this->typeList, $row['type']);

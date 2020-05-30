@@ -3,17 +3,16 @@
 	require_once('databaseLink.php');
 	class ClothBasket{
 		private $clothesList = [];
-		private $busketPrice = 0;
 		function __construct($arrayString){
 			//create connection do db and query
 			$connectorDB = new ConnectorDB();
 			//call to db, and get clothes list, which have id from array id
 			$result = $connectorDB -> query($this->getBasketQery($arrayString));
 			//loop for result
+			if($result)
 			while($row = mysqli_fetch_assoc($result)){
 				// new cloth  __construct($id, $brand, $name, $price, $gender, $type, $img_src){
 				array_push($this->clothesList, new Cloth($row['id'], $row['brand'], $row['name'], $row['price'], $row['gender'], $row['type'], $row['img_src']));
-				$this->busketPrice += end($this->clothesList)->getPrice();
 			}
 			$connectorDB -> close();
 		}
@@ -30,13 +29,18 @@
 			return $query;
 		}
 		
+		public function getByID($ID){
+			foreach($this->clothesList as $cloth){
+				if($cloth->getID() == $ID){
+					return $cloth;
+				}
+			}
+			return -1;
+		}
 
 		//fileds getters
 		public function getClothesList(){
 			return $this-> clothesList;
-		}
-		public function getBusketPrice(){
-			return $this-> busketPrice;
 		}
 	}
 ?>

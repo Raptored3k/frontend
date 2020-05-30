@@ -16,14 +16,16 @@
 			$results = $this->connectorDB->query($this->getOrderQuery($id));
 			
 			//set this filed and add one row to clothesList
-			$row = mysqli_fetch_assoc($results);
-			array_push($this->clothesList, new Cloth($row['id'], $row['brand'], $row['name'], $row['price'], $row['gender'], $row['type'], $row['img_src']));
-			$this->paid = $row['paid'];
-			$this->total_price = $row['total_price'];
-			
-			while($row = mysqli_fetch_assoc($results)){
-				//new cloth __construct($id, $name, $price, $gender, $type, $img_src){
+			if($results){
+				$row = mysqli_fetch_assoc($results);
 				array_push($this->clothesList, new Cloth($row['id'], $row['brand'], $row['name'], $row['price'], $row['gender'], $row['type'], $row['img_src']));
+				$this->paid = $row['paid'];
+				$this->total_price = $row['total_price'];
+				
+				while($row = mysqli_fetch_assoc($results)){
+					//new cloth __construct($id, $name, $price, $gender, $type, $img_src){
+					array_push($this->clothesList, new Cloth($row['id'], $row['brand'], $row['name'], $row['price'], $row['gender'], $row['type'], $row['img_src']));
+				}
 			}
 		}
 		

@@ -63,10 +63,10 @@
 			$outputHTML = "<div class='mb-5  $this->class'>";
 			$outputHTML .= "<div class=''> ";
 			$outputHTML .= "<a href='$home/clothes/?id=$id'>";
-			$outputHTML .= "<img class='img-fluid px-3 pb-5' src='$this->img_src'/>";
+			$outputHTML .= "<img class='img-fluid img-thumbnail px-3 pb-5' src='$this->img_src'/>";
 			$outputHTML .= "</a>";
-			$outputHTML .= "<div class='price '>";
-			$outputHTML .= $this->price;
+			$outputHTML .= "<div class='price'>";
+			$outputHTML .= "$this->price zł";
 			$outputHTML .= "</div>";
 			$outputHTML .= "</div>";
 			$outputHTML .= "</div>";
@@ -84,6 +84,7 @@
 		}
 
 		public function innerLabel(){
+			$id = $this->getID();
 			$outputHTML = "<div class='row justify-content-center mb-5'>";
 			$outputHTML .= "<div class='col-md-3 mb-5 col-sm-12 text-center'>";
 			$outputHTML .= "<img class='img-fluid' src='$this->img_src'/>";
@@ -107,11 +108,16 @@
 			$outputHTML .= "<option value='s'> S </option>";
 			$outputHTML .= "<option value='m'> M </option>";
 			$outputHTML .= "<option value='l'> L </option>";
-			$outputHTML .= "<option value='x;'> XL </option>";
+			$outputHTML .= "<option value='xl'> XL </option>";
 			$outputHTML .= "<option value='xxl'> XXL </option>";
 			$outputHTML .= "</select>";
 			$outputHTML .= "<br>";
-			$outputHTML .= "<button class='btn btn-dark btn-block mt-2 btn-lg'> Do koszyka </button>";
+			$outputHTML .= "<button id='$id' style='transition: all 0.3s linear;' class='btn btn-dark btn-block mt-2 btn-lg add'> Do koszyka </button>";
+			$outputHTML .= "<div class='toast px-5' style='position: absolute;margin-left:50%; transform:translate(-55%);' role='alert' aria-live='assertive' aria-atomic='true'>";
+			$outputHTML .= "<div class='toast-header'>";
+			$outputHTML .= "<strong class='mx-auto'>Dodano do koszyka</strong>";
+			$outputHTML .= "</div>";
+			$outputHTML .= "</div>";
 			$outputHTML .= "</p>";
 			$outputHTML .= "</div>";
 			$outputHTML .= "</div>";
